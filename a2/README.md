@@ -1,41 +1,5 @@
 # Assignment 2
 
-## Part 1: Raichu Board Game - Minimax implementation with Alpha-beta pruning
-
-State Space: The state space is the set of all possible positions for the Pichu, Pikachu, and Raichu on a NxN board (N >= 8).
-
-Initial State: The first board setup before any player starts paying their turn, the initial state is also the state given in the PDF for Assignment 2.(for testing purposes)
-
-Goal State: When the opposing player has used up all of their pieces i.e the opposing player has 0 total pieces remaining you, the board is in the goal state.
-
-Successor Function: Function that takes into consideration the present player and the state of the board and produces a list of potential future moves that can be made to the board given the constraints on piece movement(next moves of Pichu, Pikachu, and Raichu) is the successor function.
-
-Algorithm Used: Minimax with Alpha-Beta pruning.
-
-
-### Brief Solution Description:
-
-The problem is analogous to chess and can serve as a foundation for future development. We utilized the minimax method in conjunction with alpha-beta pruning to overcome this issue. We limited the maximum depth to 3 since anything more complicated caused the code to run slowly and produce unsatisfactory results (or any result at all).
-
-We improved the running time by utilizing 'yield' and 'itertools' to produce successors since they build successor states asynchronously and need less computation when states don't need to be examined as a result of pruning.
-
-In order to accomplish this, it utilizes both the min and max functions, traversing the tree a further +1 depth and extracting the minimum and maximum values of beta and alpha for the min script, respectively.When the maximum depth or a goal state is reached, the algorithm will end this min/max back and forth and output the move that gives the maximum evaluation function value.When the opponent has no more pieces on the board, they are in a goal state.
-
-Each element was given an importance value for the heuristic, and we utilized those values to determine our own and the adversary's scores. The value is then returned as a heuristic after we deduct these scores.
-
-We choose to utilize minimax at a max depth of 3 with alpha-beta pruning in order to reduce run times because the description of the game satisfies all of the criteria for an adversarial search based game (two players, turn taking, 0 sum, time limits, etc.). We had to choose an evaluation function for the minimax algorithm to employ in order to evaluate each state differently based on the player. We chose to employ a weighted evaluation function, which assigned weights to the variation in the number of each unique item. The algorithm would be driven to attempt to reduce the oppositions between raichu pieces over a pichu piece, for example, because the more important parts (raichu) received more weights than the less important ones (pichu).
-
-### References
-
-1. https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-4-alpha-beta-pruning/  #No Code was copied
-
-### Problems, Assumptions, Decisions :
-The most important decision was which assessment capability to use.In games like these, where different pieces have different effects (raichu can move more than pichu and pikachu, for example), a weighted evaluation function seemed like the best choice. For each piece, the number of pieces on the board that differs between players is determined, and that number is given a specific weight, with the more valuable pieces receiving more weight.We had to slightly alter the weights of each piece, but in the end we settled on 1 for Pichu, 5 for Pikachu, and 15 for Raichu.In certain states, such as the initial state, where a single move will not eliminate any pieces, our evaluation function will return 0 for the successors.To accommodate this, a brand-new component was added.
-To determine how much mobility a move will provide in the future, it multiplies each player's total number of successors from the current state by 0.1.As a result, run times are definitely longer, especially for states with a lot of raichus.
-Also we faced probem in parsing the Json file, where the file was used to store the most optimal solution but it was overcomed.
-
-
-
 ## Part 2:  Truth be Told
 
 ### Problem: 
