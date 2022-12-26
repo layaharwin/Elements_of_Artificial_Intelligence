@@ -1,4 +1,3 @@
-# shahds-jrateria-lharwin-a3
 # Assignment 3
 ## Part-1
 ### Part-of-speech tagging
@@ -91,26 +90,3 @@ The following is the posterior probabilities and observations:
 - Simple and HMM return the highest value of their probabilities for their own solutions.
 - However, this may not always be the case with Complex(when it doesn't converge) because it is a probabilistic model. 
 
-## Part-2
-### AI Text Recognition - Implementation of HMM with MAP inference and Viterbi Algorithm
-
-#### Brief Description of Problem
-We divided this task into two different problems since this component required two distinct outputs (the Simple Bayes output and the HMM Viterbi output), with HMM serving as an extension of the Simple Bayes Net. Beginning with some text training data, we had to generate transition and starting state probabilities (which we decided to use bc.train). To determine the emission probability, we compared each training letter to each testing letter, comparing the ratio of accurate black and white characters to the total number of characters to determine which testing letter matched the training letter the closest.We then incorporated the emission probabilities, transition probabilities, and starting state probabilities into an HMM, generated a viterbi matrix, and backpropagated to determine the best output using MAP inference.
-
-#### Simple
-With this approach, we return the characters that have the highest emission probability of of all the characters that are provided. We also used laplace smoothing for the probability for new terms.
-
-#### Initial Probability
-Initial Probability is obtained by counting the instances of a letter being used as an initial letter and dividing that number by the total number of words in the training data.
-
-#### Emission Probability
-Comparing each pixel in the test and training sets of data yields the emission probability. We may compute it by [(1 - m)^matched * m^unmatched] after counting the number of matched and unmatched pixels and accounting for m% noise.
-
-#### Transition Probability
-The number of transitions between two letters is counted, and the transition probability is computed by dividing that number by the total number of occurrences of the first letter.
-
-#### Viterbi
-We build the Vlue_table and select_table tables for Viterbi. Then, we use the initial and emission probability to fill the first column. The remaining values are then calculated using the populated data and the transition probability. We return the most likely path via backtracking.
-
-#### Problem and Assumptions
-Choosing a text training dataset was our initial step, and we chose to utilize bc.train with POS removal. We had to decide if we wanted the initial state probabilities to be the chance that a phrase began with a given letter, which was a rather significant assumption to make when calculating the probabilities. We chose the first option since it provides us with more training scenarios. We chose to employ a weighted method for the emission probability since the results from a basic Bayes model were much improved.We tested and tuned several parameters before settling on the weights we used (0.6 & 0.4) vs (0.9 & 0.1). Since the emission probabilities performed so accurately in the simple bayes output, we chose to use a weighted based approach once more when incorporating the emission and transition probs into the viterbi algorithm, using the transition probs and the previous state vertibi outputs as additional components.
